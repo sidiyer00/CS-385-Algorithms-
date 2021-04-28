@@ -103,6 +103,10 @@ vector<int> backtrack_solution() {
         }
     }
 
+    for(int i = 0; i < num_rows - 1; i++){
+        solution[i] = solution[i] - solution[i+1];
+    }
+
     return solution;
 }
 
@@ -175,11 +179,9 @@ void cleanup() {
     // loop through values, sums - delete all the pointers
     for (int i = 0; i < num_rows; i++) {
         delete [] values[i];
-        delete [] sums[i];
     }
     // delete the values, sums pointers themselves
     delete [] values;
-    delete [] sums;
 }
 
 int main(int argc, char * const argv[]) {
@@ -214,5 +216,5 @@ int main(int argc, char * const argv[]) {
 
     cleanup();  // clears all them filthy pointers
 
-    return 1;
+    return 0;
 }
