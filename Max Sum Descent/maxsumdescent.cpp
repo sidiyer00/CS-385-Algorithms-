@@ -43,22 +43,15 @@ int num_digits(int num) {
  * Displays the 2D array of values read from the file in the format of a table.
  */
 void display_table() {
-    int max_width = num_digits(max_value);
 
-    for(int i = 0; i < num_rows; ++i){
-        cout << setw(max_width);
-        for(int j = 0; j <= i; ++j){
-            cout << values[i][j];
-            if(j == i && i != num_rows - 1){
-                cout << "\n";
-            } else if (j == i && i == num_rows - 1){
-                cout << "";
-            } else{
-                cout << " ";
-            }
+    int width = num_digits(max_value);
+    for (int i = 0; i < num_rows; i++) {
+        cout << values[i][0];
+        for (int j = 1; j < i + 1; j++) {
+            cout << setw(width + 1) << values[i][j];
         }
+        cout << "\n";
     }
-    cout << endl;
 }
 
 /**
