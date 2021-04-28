@@ -89,7 +89,19 @@ int compute_max_sum() {
  */
 vector<int> backtrack_solution() {
     vector<int> solution;
-    // TODO
+    int tracker_index = 0;
+
+    // we always start from the first row, first value
+    solution.push_back(values[0][tracker_index]);
+
+    for(int i = 1; i < num_rows; ++i){
+        if(sums[i][tracker_index] >= sums[i][tracker_index + 1]){
+            solution.push_back(values[i][tracker_index]);
+        } else {
+            solution.push_back(values[i][tracker_index + 1]);
+            tracker_index++;
+        }
+    }
 
     return solution;
 }
@@ -190,15 +202,15 @@ int main(int argc, char * const argv[]) {
     
     // display table and max sum
     display_table();
-    cout << "Max sum: " << compute_max_sum() << "\n";
+    cout << "Max sum: " << compute_max_sum() << endl;
 
     // loop through solution path and print it 
     vector<int> soln = backtrack_solution();
     cout << "Values: [";
-    for(int i: soln){
-        cout << i;
+    for (int i = 0; i < num_rows - 1; i++) {
+        cout << soln[i] << ", ";
     }
-    cout << "]" << endl;
+    cout << soln[num_rows-1] << "]" << endl;
 
     cleanup();  // clears all them filthy pointers
 
